@@ -123,4 +123,19 @@ class Utilities
             }
         }
     }
+
+    /**
+     * Check if the given string is gzip encoded.
+     *
+     * This function inspects the first two bytes of the string to check if they match the
+     * gzip signature (0x1f8b), which is a standard identifier for gzip-compressed data.
+     *
+     * @param string $data The string to check.
+     * @return bool Returns true if the string is gzip encoded, false otherwise.
+     */
+    public static function isGzipEncoded(string $data): bool
+    {
+        return substr($data, 0, 2) === "\x1f\x8b";
+    }
+
 }
