@@ -125,6 +125,41 @@ class Utilities
     }
 
     /**
+     * Generates a random password of the specified length.
+     *
+     * This method uses cryptographically secure random number generation.
+     * In case of an exception during the `random_int` call, it will retry until successful.
+     *
+     * @param int $length Length of the generated password. Default is 8.
+     * @return string The generated password.
+     * @throws Exception If the length is less than 1.
+     */
+    public static function generatePassword(int $length = 8): string
+    {
+        if ($length < 1) {
+            throw new Exception('Password length must be at least 1.');
+        }
+
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $password = '';
+        $maxIndex = strlen($characters) - 1;
+
+        for ($i = 0; $i < $length; $i++) {
+            while (true) {
+                try {
+                    $index = random_int(0, $maxIndex);
+                    $password .= $characters[$index];
+                    break; // Exit loop if successful
+                } catch (Exception $e) {
+                    // Retry on failure
+                }
+            }
+        }
+
+        return $password;
+    }
+
+    /**
      * Check if the given string is gzip encoded.
      *
      * This function inspects the first two bytes of the string to check if they match the
