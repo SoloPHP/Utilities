@@ -125,6 +125,31 @@ class Utilities
     }
 
     /**
+     * Generates a unique numeric identifier.
+     *
+     * This function generates a numeric identifier as a string,
+     * suitable for use as a unique identifier in the database.
+     * The value is guaranteed to be between `10^($length - 1)` and `10^$length - 1`.
+     *
+     * @param int $length The length of the numeric identifier. Default is 6.
+     * @return string A numeric identifier of the specified length.
+     * @throws Exception If it was not possible to gather sufficient entropy.
+     */
+    public static function generateId(int $length = 6): string
+    {
+        $min = (int)pow(10, $length - 1);
+        $max = (int)pow(10, $length) - 1;
+
+        while (true) {
+            try {
+                return (string)random_int($min, $max);
+            } catch (Exception $e) {
+                // Continue trying until successful
+            }
+        }
+    }
+
+    /**
      * Generates a random password of the specified length.
      *
      * This method uses cryptographically secure random number generation.
