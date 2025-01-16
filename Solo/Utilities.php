@@ -198,4 +198,26 @@ class Utilities
         return substr($data, 0, 2) === "\x1f\x8b";
     }
 
+    /**
+     * Checks if the given array is numerically indexed.
+     *
+     * This function determines if an array has consecutive numeric keys
+     * starting from 0. Empty arrays are considered indexed arrays.
+     *
+     * @param mixed $data The value to check.
+     * @return bool Returns true if the value is an indexed array, false otherwise.
+     */
+    public static function isIndexedArray(mixed $data): bool
+    {
+        if (!is_array($data)) {
+            return false;
+        }
+
+        if (empty($data)) {
+            return true;
+        }
+
+        return array_keys($data) === range(0, count($data) - 1);
+    }
+
 }
