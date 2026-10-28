@@ -2,6 +2,7 @@
   "name": "solophp/utilities",
   "type": "library",
   "description": "Collection of utility functions that can be used throughout the application",
+  "abandoned": true,
   "keywords": ["utilities","php"],
   "license": "MIT",
   "authors": [
